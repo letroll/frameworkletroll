@@ -5,16 +5,21 @@ import java.util.List;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.annotation.TargetApi;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
+import android.provider.Settings;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.view.Display;
 import android.view.WindowManager;
 
@@ -31,7 +36,7 @@ public class SystemInformation {
      * @param context
      * @return return an arraylist<String> who contain the user's accounts
      */
-    public static ArrayList<String> getMailsUser(Context context) {
+    @TargetApi(5) public static ArrayList<String> getMailsUser(Context context) {
         Account[] accounts = AccountManager.get(context).getAccounts();
         ArrayList<String> possibleEmail = new ArrayList<String>();
         for (Account account : accounts) {
@@ -72,6 +77,22 @@ public class SystemInformation {
         return false;
     }
 
+    
+    public static boolean isWirelessLocationEnabled (Context context) {
+        ContentResolver cr = context.getContentResolver();
+        String enabledProviders = Settings.Secure.getString(cr, Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+        if (!TextUtils.isEmpty(enabledProviders)) {
+            // not the fastest way to do that :)
+            String[] providersList = TextUtils.split(enabledProviders, ",");
+            for (String provider : providersList) {
+                if (LocationManager.NETWORK_PROVIDER.equals(provider)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
     /**
      * @return VersionName
      */
