@@ -176,6 +176,23 @@ public class FileLt {
             return false;
         }
     }
+
+    
+    public static boolean copyFile(String source, String destination,Boolean showTime) {
+        long startnow;
+        long endnow;
+        Boolean result;
+        startnow = android.os.SystemClock.uptimeMillis();
+        result=copyFile(source, destination);
+        if(showTime){
+            endnow = android.os.SystemClock.uptimeMillis();
+            Notification.log("MYTAG", "Excution time: "+(endnow-startnow)+" ms");
+            endnow=endnow-startnow;
+            int seconds = (int) (endnow / 1000) % 60 ;
+            Notification.log("MYTAG", "Excution time: "+seconds+" sec");
+        }
+        return result; 
+    }
     
     /**
      * Copie un fichier.
