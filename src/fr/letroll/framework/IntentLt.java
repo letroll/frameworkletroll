@@ -44,4 +44,18 @@ public class IntentLt {
                         PackageManager.MATCH_DEFAULT_ONLY);
         return list.size() > 0;
     }
+    
+    public static void sendMail(Context context, String mail, String subject, String text){
+        /* Create the Intent */
+        final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+
+        /* Fill it with Data */
+        emailIntent.setType("plain/text");
+        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] { mail });
+        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, subject);
+         emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, text);
+
+        /* Send it off to the Activity-Chooser */
+        context.startActivity(Intent.createChooser(emailIntent, "envoyer avec"));
+    }
 }
