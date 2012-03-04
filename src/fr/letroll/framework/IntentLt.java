@@ -1,12 +1,15 @@
 package fr.letroll.framework;
 
+import java.io.File;
 import java.util.List;
 
+import android.R.bool;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.os.Environment;
 
 public class IntentLt {
 
@@ -34,6 +37,21 @@ public class IntentLt {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+    
+    public static void uninstallApplication(Context context,String mpackage){
+        Uri packageURI = Uri.parse("package:"+mpackage);
+        Intent uninstallIntent = new Intent(Intent.ACTION_DELETE, packageURI);
+        context.startActivity(uninstallIntent);
+//        Intent intent = new Intent(Intent.ACTION_DELETE);
+//        intent.setData(Uri.parse("package:"+mpackage));
+//        context.startActivity(intent);
+    }
+    
+    public static void installApplication(Context context,String mpackage){
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.fromFile(new File(mpackage)), "application/vnd.android.package-archive");
+        context.startActivity(intent);
     }
     
     public static boolean isIntentAvailable(Context context, String action) {

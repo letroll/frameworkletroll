@@ -5,7 +5,6 @@ import java.util.List;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
-import android.annotation.TargetApi;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -36,7 +35,7 @@ public class SystemInformation {
      * @param context
      * @return return an arraylist<String> who contain the user's accounts
      */
-    @TargetApi(5) public static ArrayList<String> getMailsUser(Context context) {
+    public static ArrayList<String> getMailsUser(Context context) {
         Account[] accounts = AccountManager.get(context).getAccounts();
         ArrayList<String> possibleEmail = new ArrayList<String>();
         for (Account account : accounts) {
