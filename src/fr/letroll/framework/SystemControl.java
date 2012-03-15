@@ -28,10 +28,37 @@ public class SystemControl {
     		e.printStackTrace();
     	}
     }
-    
+    /**
+     * à utiliser avec la permission : android.permission.MODIFY_AUDIO_SETTINGS
+     * @param context
+     */
     public static void muteSound(Context context){
         AudioManager mAudioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
         mAudioManager.setStreamMute(AudioManager.STREAM_MUSIC, true);
     }
-
+/**
+ * 
+ * @param context
+ * @param mode
+ * 
+ * 1: normal
+ * 2: vibrate
+ * 3: silent
+ */
+    public static void changeSoundMode(Context context,int mode){
+		AudioManager audMangr = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+		switch (mode) {
+		case 1:
+			audMangr.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+			break;
+		case 2:
+			audMangr.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+			break;
+		case 3:
+			audMangr.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+			break;
+		default:
+			break;
+		}
+    }
 }
