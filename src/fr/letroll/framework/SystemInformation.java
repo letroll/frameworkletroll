@@ -12,6 +12,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
 import android.location.LocationManager;
 import android.media.AudioManager;
 import android.net.ConnectivityManager;
@@ -20,11 +21,28 @@ import android.os.Build;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.TypedValue;
 import android.view.Display;
 import android.view.WindowManager;
 
 public class SystemInformation {
 
+	/**
+	 * @return pixel value for dip mesure
+	 */
+	public static float getPixelFromDip(int dp,Context context) {	
+	Resources r = context.getResources();
+	return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics());
+	}
+	
+	/**
+	 * @return dip value for pixel mesure
+	 */
+	public static float getDipFromPixel(int px,Context context) {	
+	Resources r = context.getResources();
+	return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, px, r.getDisplayMetrics());
+	}
+	
 	/**
 	 * @return true if sdcard mounted
 	 */
