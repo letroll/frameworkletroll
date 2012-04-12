@@ -1,10 +1,11 @@
-package fr.letroll.framework;
+package fr.letroll.framework.database;
 
+import fr.letroll.framework.Notification;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class DBHelper extends SQLiteOpenHelper {
+public class Helper extends SQLiteOpenHelper {
     
     private final Context context; 
     
@@ -12,7 +13,7 @@ public class DBHelper extends SQLiteOpenHelper {
     String[] createQuerys;
     int version;
     
-    public DBHelper(Context context, String name,String createQuery, int version) {
+    public Helper(Context context, String name,String createQuery, int version) {
         super(context, name,null, version);
         this.name=name;
         this.context = context;
@@ -20,7 +21,7 @@ public class DBHelper extends SQLiteOpenHelper {
         this.version = version;
     }
     
-    public DBHelper(Context context, String name,String[] createQuerys, int version) {
+    public Helper(Context context, String name,String[] createQuerys, int version) {
         super(context, name,null, version);
         this.name=name;
         this.context = context;

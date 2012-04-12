@@ -1,4 +1,4 @@
-package fr.letroll.framework;
+package fr.letroll.framework.system;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ import android.util.TypedValue;
 import android.view.Display;
 import android.view.WindowManager;
 
-public class SystemInformation {
+public class Information {
 
 	/**
 	 * @return pixel value for dip mesure

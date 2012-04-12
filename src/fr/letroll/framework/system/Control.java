@@ -1,12 +1,13 @@
-package fr.letroll.framework;
+package fr.letroll.framework.system;
 
+import fr.letroll.framework.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 
-public class SystemControl {
+public class Control {
 	private static final String tag="frameworkletroll";
 	
     public static void enableWifi(Context context){
@@ -29,7 +30,7 @@ public class SystemControl {
     	}
     }
     /**
-     * à utiliser avec la permission : android.permission.MODIFY_AUDIO_SETTINGS
+     * ?? utiliser avec la permission : android.permission.MODIFY_AUDIO_SETTINGS
      * @param context
      */
     public static void muteSound(Context context){

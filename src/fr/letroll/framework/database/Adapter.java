@@ -1,40 +1,40 @@
-package fr.letroll.framework;
+package fr.letroll.framework.database;
 
 import android.content.Context;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 
-public class DBAdapter {
-    DBHelper dBHelper;
+public class Adapter {
+    Helper dBHelper;
     Context context;
     String dbname;
     SQLiteDatabase db;
 
-    public DBAdapter(Context context,String name,String createQuery,SQLiteDatabase db,int version) {
+    public Adapter(Context context,String name,String createQuery,SQLiteDatabase db,int version) {
         this.context = context;
         this.dbname = name;
         this.db=db;
-        dBHelper = new DBHelper(context, dbname, createQuery, version);
+        dBHelper = new Helper(context, dbname, createQuery, version);
     }
     
-    public DBAdapter(Context context,String name,String[] createQuerys,SQLiteDatabase db,int version) {
+    public Adapter(Context context,String name,String[] createQuerys,SQLiteDatabase db,int version) {
         this.context = context;
         this.dbname = name;
         this.db=db;
-        dBHelper = new DBHelper(context, dbname, createQuerys, version);
+        dBHelper = new Helper(context, dbname, createQuerys, version);
     }
 
-    public DBAdapter(Context context,String name,String createQuery) {
+    public Adapter(Context context,String name,String createQuery) {
         this.context = context;
         this.dbname = name;
-        dBHelper = new DBHelper(context, dbname, createQuery, 1);
+        dBHelper = new Helper(context, dbname, createQuery, 1);
     }
     
     
-    public DBAdapter(Context context,String name,String createQuery[]) {
+    public Adapter(Context context,String name,String createQuery[]) {
         this.context = context;
         this.dbname = name;
-        dBHelper = new DBHelper(context, dbname, createQuery, 1);
+        dBHelper = new Helper(context, dbname, createQuery, 1);
     }
     
     public int size() {
@@ -42,7 +42,7 @@ public class DBAdapter {
 
     }
 
-    public DBAdapter open() {
+    public Adapter open() {
         db = dBHelper.getWritableDatabase();
         return this;
     }

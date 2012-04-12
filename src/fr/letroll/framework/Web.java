@@ -27,10 +27,15 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.ByteArrayBuffer;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import org.apache.http.params.HttpProtocolParams;
 
 public class Web {
+	
+	private static String tag = "Web";
+	
 	/**
 	 * Download a file.
 	 * 
@@ -165,6 +170,32 @@ public class Web {
 		return "";
 	}
 
+	/**
+	 * 
+	 * @param url
+	 * @return Bitmap image
+	 */
+	public static Bitmap getImageBitmap(String url) {
+		Bitmap bm = null;
+		try {
+			URL aURL = new URL(url);
+			URLConnection conn = aURL.openConnection();
+			conn.connect();
+			InputStream is = conn.getInputStream();
+			BufferedInputStream bis = new BufferedInputStream(is);
+			bm = BitmapFactory.decodeStream(bis);
+			bis.close();
+			is.close();
+		} catch (IOException e) {
+			Notification.log(tag, "Error getting bitmap:" + url);
+			if (url.length() < 2)
+				Notification.log(tag, "url vide...");
+			e.printStackTrace();
+			return null;
+		}
+		return bm;
+	}
+	
 	/**
 	 * @param Context
 	 *            context
