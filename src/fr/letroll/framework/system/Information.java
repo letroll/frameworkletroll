@@ -26,23 +26,24 @@ import android.view.Display;
 import android.view.WindowManager;
 
 public class Information {
+//	private final static String tag = "Information";
 
 	/**
 	 * @return pixel value for dip mesure
 	 */
-	public static float getPixelFromDip(int dp,Context context) {	
-	Resources r = context.getResources();
-	return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics());
+	public static float getPixelFromDip(int dp, Context context) {
+		Resources r = context.getResources();
+		return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics());
 	}
-	
+
 	/**
 	 * @return dip value for pixel mesure
 	 */
-	public static float getDipFromPixel(int px,Context context) {	
-	Resources r = context.getResources();
-	return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, px, r.getDisplayMetrics());
+	public static float getDipFromPixel(int px, Context context) {
+		Resources r = context.getResources();
+		return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, px, r.getDisplayMetrics());
 	}
-	
+
 	/**
 	 * @return true if sdcard mounted
 	 */
@@ -66,18 +67,18 @@ public class Information {
 	/**
 	 * @param context
 	 * @return true if we are connected
+	 * 	PERMISSION:
+	 * <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	 */
 	public static boolean IsConnectedToNetwork(Context context) {
-		ConnectivityManager conManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo[] allNetworkInfo = conManager.getAllNetworkInfo();
-		NetworkInfo currNetworkInfo;
-		boolean anythingConnected = false;
-		for (int i = 0; i < allNetworkInfo.length; i++) {
-			currNetworkInfo = allNetworkInfo[i];
-			if (currNetworkInfo.getState() == NetworkInfo.State.CONNECTED)
-				anythingConnected = true;
-		}
-		return anythingConnected;
+	    ConnectivityManager cm =
+	            (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+	    	try{
+	        return cm.getActiveNetworkInfo().isConnectedOrConnecting();
+	    	}catch (Exception e) {
+				// call if cm was null... so there aren't any connection:
+	    		return false;
+			}
 	}
 
 	public static boolean IsConnectedToWifi(Context context) {
